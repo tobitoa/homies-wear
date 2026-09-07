@@ -4,6 +4,7 @@ import "./styles.css";
 import "./auth.css";
 import "./final-touch.css";
 import "./usability.css";
+import "./mobile-fix.css";
 
 const images = {
   hero: "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=1200&q=88",

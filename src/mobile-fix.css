@@ -1,0 +1,21 @@
+@media (max-width: 760px) {
+  html {
+    scroll-padding-top: 65px;
+  }
+
+  body {
+    padding-top: 65px;
+  }
+
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 100;
+    width: 100%;
+  }
+
+  .main-nav {
+    top: 65px;
+    z-index: 101;
+  }
+}
