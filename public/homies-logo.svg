@@ -1,0 +1,26 @@
+<svg width="540" height="148" viewBox="0 0 540 148" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="metal" x1="45" y1="14" x2="118" y2="108" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6A6258"/>
+      <stop offset=".45" stop-color="#E9DFD0"/>
+      <stop offset="1" stop-color="#82766A"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="8" y1="8" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8E7251"/>
+      <stop offset=".5" stop-color="#E6BF8C"/>
+      <stop offset="1" stop-color="#93724F"/>
+    </linearGradient>
+  </defs>
+  <path d="M112 6C69 6 34 41 34 84c0 13 3 26 9 37" stroke="url(#gold)" stroke-width="1.2" opacity=".72"/>
+  <path d="M112 6c43 0 78 35 78 78 0 13-3 26-9 37" stroke="url(#gold)" stroke-width="1.2" opacity=".72"/>
+  <path d="m199 67 2.4 8.4 8.6 2.4-8.6 2.5-2.4 8.3-2.4-8.3-8.5-2.5 8.5-2.4 2.4-8.4Z" fill="url(#gold)"/>
+  <path d="M47 25h29c-9 4-13 10-13 20v44c0 9-6 15-17 17 9 2 16 1 22-4l30-27c4-4 8-6 13-8 5-2 9-6 9-12 0-8-6-13-14-13-10 0-15 6-17 16h-4c2-15 9-24 23-24 13 0 22 8 22 20 0 10-5 15-14 19-6 3-11 7-18 13L75 108H47c10-3 14-9 14-19V44c0-10-4-16-14-19Z" fill="url(#metal)"/>
+  <path d="M115 25h28c-10 3-14 9-14 19v64c9-1 18-7 26-13 9-7 15-10 23-10 9 0 16 5 19 13-9-6-17-6-25-1l-28 17h-29c10-3 14-9 14-19V44c0-10-4-16-14-19Z" fill="url(#metal)"/>
+  <path d="M113 30c0-11 7-19 18-19s19 8 19 18c0 8-4 13-11 18-5 4-7 7-7 13h-5c0-8 3-13 9-18 6-5 8-8 8-13 0-7-5-13-13-13-8 0-13 5-14 14h-4Z" fill="url(#gold)"/>
+  <path d="M36 72c20 18 39 22 59 10l34-21c8-5 15-4 20 2-8-1-13 2-18 8-11 15-25 29-46 40-19 10-36 12-50 5V72Z" fill="#272623" stroke="url(#gold)" stroke-width=".8"/>
+  <text x="234" y="70" fill="#28251F" font-family="Georgia,serif" font-size="33" font-weight="700" letter-spacing="2">HOMIES</text>
+  <text x="407" y="70" fill="#5E554B" font-family="Arial,sans-serif" font-size="30" font-weight="300" letter-spacing="8">WEAR</text>
+  <path d="M237 93h52m29 0h28m28 0h32" stroke="#9A7B59" stroke-width="1"/>
+  <path d="m309 86 6 6-6 6m29-12-6 6 6 6" stroke="#9A7B59" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="236" y="118" fill="#878077" font-family="Arial,sans-serif" font-size="8" letter-spacing="4">WEAR LESS. SWAP MORE.</text>
+</svg>
