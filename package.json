@@ -10,6 +10,7 @@
     "build:frontend": "npm --prefix frontend run build",
     "preview": "npm --prefix frontend run preview",
     "preview:frontend": "npm --prefix frontend run preview",
+    "start": "node server/server.js",
     "server": "node server/server.js",
     "seed": "node server/seeds/seed.js",
     "test": "node server/tests/test-runner.js",

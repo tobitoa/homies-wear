@@ -1,6 +1,8 @@
 import { io } from "socket.io-client";
 
-const API_BASE = "http://localhost:4000/api";
+const API_BASE = (
+  import.meta.env.VITE_API_URL || "http://localhost:4000/api"
+).replace(/\/$/, "");
 const TOKEN_KEY = "homies_token";
 const USER_KEY = "homies_user";
 
@@ -265,7 +267,7 @@ export function getSocket() {
   if (!token) return null;
 
   if (!socketClient || !socketClient.connected) {
-    socketClient = io("http://localhost:4000", {
+    socketClient = io(import.meta.env.VITE_SOCKET_URL || "http://localhost:4000", {
       auth: { token },
       reconnectionAttempts: 5,
     });

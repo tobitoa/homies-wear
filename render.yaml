@@ -1,0 +1,35 @@
+# Render Blueprint for Homies Wear monorepo.
+# Deploy via Render Dashboard → New → Blueprint → select this repo.
+# Secrets marked `sync: false` must be filled in the Render dashboard.
+
+services:
+  # Backend API (Express + Socket.IO)
+  - type: web
+    name: homies-wear-api
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MONGODB_URI
+        sync: false # e.g. MongoDB Atlas connection string (recommended on free tier)
+      - key: CLIENT_ORIGIN
+        sync: false # e.g. https://homies-wear-web.onrender.com
+
+  # Frontend (Vite static site)
+  - type: web
+    name: homies-wear-web
+    runtime: static
+    buildCommand: npm --prefix frontend install && npm --prefix frontend run build
+    staticPublishPath: frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false # e.g. https://homies-wear-api.onrender.com/api (note the /api suffix)
+      - key: VITE_SOCKET_URL
+        sync: false # e.g. https://homies-wear-api.onrender.com (no /api suffix)
