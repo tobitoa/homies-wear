@@ -12,7 +12,8 @@ export async function connectDB() {
     await mongoose.connect(config.mongoUri, {
       serverSelectionTimeoutMS: 3000,
     });
-    logger.info(`MongoDB connected to ${config.mongoUri}`);
+    const safeUri = config.mongoUri.replace(/:\/\/[^@]+@/, "://***@");
+    logger.info(`MongoDB connected to ${safeUri}`);
   } catch (err) {
     logger.warn(
       `Could not connect to external MongoDB at ${config.mongoUri} (${err.message}).`,
