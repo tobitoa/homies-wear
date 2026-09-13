@@ -4,14 +4,19 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "dev": "npm --prefix frontend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "build:frontend": "npm --prefix frontend run build",
+    "preview": "npm --prefix frontend run preview",
+    "preview:frontend": "npm --prefix frontend run preview",
     "server": "node server/server.js",
-    "format": "prettier --write \"src/**/*.{js,jsx,css}\" \"server/**/*.js\""
+    "seed": "node server/seeds/seed.js",
+    "test": "node server/tests/test-runner.js",
+    "format": "prettier --write \"frontend/src/**/*.{js,jsx,css}\" \"frontend/*.js\" \"frontend/*.html\" \"server/**/*.js\"",
+    "format:frontend": "npm --prefix frontend run format"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "latest",
     "bcryptjs": "latest",
     "cors": "latest",
     "dotenv": "latest",
@@ -20,11 +25,10 @@
     "helmet": "latest",
     "jsonwebtoken": "latest",
     "mongoose": "latest",
-    "vite": "latest",
-    "react": "latest",
-    "react-dom": "latest"
+    "socket.io": "^4.8.3"
   },
   "devDependencies": {
+    "mongodb-memory-server": "^11.2.0",
     "prettier": "latest"
   }
 }

@@ -389,15 +389,6 @@ h2 em {
   align-items: center;
   gap: 5px;
 }
-.hero-caption {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 12px;
-  color: #97928a;
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
 .value-strip {
   background: #ebe8e1;
   border-block: 1px solid var(--border);
@@ -2150,9 +2141,6 @@ h2 em {
     left: 13px;
     top: auto;
     bottom: 35px;
-  }
-  .hero-caption {
-    font-size: 8px;
   }
   .value-grid {
     display: grid;
