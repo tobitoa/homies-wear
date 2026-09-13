@@ -1478,6 +1478,69 @@ function ListPage({ navigate, currentUser, unreadCount }) {
   const [published, setPublished] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [photos, setPhotos] = useState([]);
+  const [photoError, setPhotoError] = useState("");
+
+  const MAX_PHOTOS = 4;
+
+  const downscaleImage = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error("Could not read that file."));
+      reader.onload = () => {
+        const img = new Image();
+        img.onerror = () => reject(new Error("That file is not a readable image."));
+        img.onload = () => {
+          const MAX_DIM = 1200;
+          const scale = Math.min(1, MAX_DIM / Math.max(img.width, img.height));
+          const canvas = document.createElement("canvas");
+          canvas.width = Math.max(1, Math.round(img.width * scale));
+          canvas.height = Math.max(1, Math.round(img.height * scale));
+          canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+          resolve(canvas.toDataURL("image/jpeg", 0.82));
+        };
+        img.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+  const handlePhotoSelect = async (e) => {
+    const files = Array.from(e.target.files || []);
+    e.target.value = "";
+    if (files.length === 0) return;
+    setPhotoError("");
+    const slotsLeft = MAX_PHOTOS - photos.length;
+    if (slotsLeft <= 0) {
+      setPhotoError(`You can add up to ${MAX_PHOTOS} photos.`);
+      return;
+    }
+    const picked = files.slice(0, slotsLeft);
+    if (files.length > slotsLeft) {
+      setPhotoError(
+        `Only ${slotsLeft} more photo(s) fit (${MAX_PHOTOS} max). Extra files skipped.`,
+      );
+    }
+    for (const file of picked) {
+      if (!file.type.startsWith("image/")) {
+        setPhotoError("Only image files (JPG, PNG) are supported.");
+        continue;
+      }
+      if (file.size > 12 * 1024 * 1024) {
+        setPhotoError(`"${file.name}" is too large (12 MB max per photo).`);
+        continue;
+      }
+      try {
+        const dataUrl = await downscaleImage(file);
+        setPhotos((prev) => (prev.length < MAX_PHOTOS ? [...prev, dataUrl] : prev));
+      } catch {
+        setPhotoError(`Could not process "${file.name}". Try another photo.`);
+      }
+    }
+  };
+
+  const removePhoto = (index) => {
+    setPhotos((prev) => prev.filter((_, i) => i !== index));
+  };
 
   // Dynamically update estimated value using backend calculation
   useEffect(() => {
@@ -1513,7 +1576,7 @@ function ListPage({ navigate, currentUser, unreadCount }) {
         condition,
         description,
         estimatedValue,
-        images: [fallbackImages.jacket],
+        images: photos.length > 0 ? photos : [fallbackImages.jacket],
         location: currentUser.location || "Jorhat, Assam",
       });
       setPublished(true);
@@ -1556,13 +1619,36 @@ function ListPage({ navigate, currentUser, unreadCount }) {
           <form className="listing-form" onSubmit={handleSubmit}>
             {error && <div style={{ color: "crimson", marginBottom: 12 }}>{error}</div>}
             <label className="photo-upload">
-              <input type="file" hidden />
+              <input
+                type="file"
+                hidden
+                accept="image/*"
+                multiple
+                onChange={handlePhotoSelect}
+              />
               <span>
                 <Icon name="camera" size={24} />
-                <strong>Add photos</strong>
-                <small>JPG, PNG · automatically styled for clean feeds</small>
+                <strong>
+                  {photos.length > 0 ? `${photos.length} photo(s) added` : "Add photos"}
+                </strong>
+                <small>JPG, PNG · up to {MAX_PHOTOS} · styled for clean feeds</small>
               </span>
             </label>
+            {photoError && (
+              <div style={{ color: "crimson", marginBottom: 12 }}>{photoError}</div>
+            )}
+            {photos.length > 0 && (
+              <div className="photo-preview-grid">
+                {photos.map((src, i) => (
+                  <div className="photo-preview" key={i}>
+                    <img src={src} alt={`Upload preview ${i + 1}`} />
+                    <button type="button" onClick={() => removePhoto(i)}>
+                      Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
             <label>
               Item name
               <input
